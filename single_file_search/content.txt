@@ -1,0 +1,65 @@
+!contents
+
+!4 Mapped API Property Names with GUI Fields
+|Comment                      |
+|API PROPERTY NAME|GUI FIELD  |
+|title            |Course Name|
+|courseId         |Course ID  |
+
+!4 Switch to Remote API Calling
+|Switch to Remote|
+
+!4 LF Create Course
+|script                                                                                          |
+|Lf create course|!{courseId: &$Datapool_Course2.courseId, title: &$Datapool_Course2.courseTitle}|
+|Lf create course|!{courseId: &$Datapool_Course4.courseId, title: &$Datapool_Course4.courseTitle}|
+|Lf create course|!{courseId: &$Datapool_Course5.courseId, title: &$Datapool_Course5.courseTitle}|
+
+!4 LF Course Exists
+|script                                      |
+|Lf course exists|&$Datapool_Course2.courseId|
+|Lf course exists|&$Datapool_Course4.courseId|
+|Lf course exists|&$Datapool_Course5.courseId|
+
+!4 Switch to Local GUI Calling
+|Switch to Local|
+
+!4 Get Unique Parameter from Datapool
+!|script                                                             |
+|$dpCourse2Title=|get unique parameter|&$Datapool_Course2.courseTitle|
+
+!4 Switch to Remote API Calling
+|Switch to Remote|
+
+!4 LF Get Course and Get String Property - Validate Course Title
+|script                                                          |
+|$course2=|Lf get course      |&$Datapool_Course2.courseId       |
+|check    |get string property|title|for|$course2|$dpCourse2Title|
+
+!4 LF Save Course - Update the Course Title
+
+!define dpCourse2TitleUpdate {LF ACCEPTANCE fit course2 UPDATE}
+
+|script                                                                                  |
+|$course2Update=    |Lf get course|&$Datapool_Course2.courseId                           |
+|set string property|title        |for|$course2Update|to|LF ACCEPTANCE fit course2 UPDATE|
+|Lf save course     |$course2Update                                                      |
+
+!4 LF Get Course and Get String Property - Validate Updated Course Title
+|script                                                                                       |
+|$course2Update=|Lf get course      |&$Datapool_Course2.courseId                              |
+|check          |get string property|title|for|$course2Update|LF ACCEPTANCE fit course2 UPDATE|
+
+!4 LF Delete Course
+|script                                      |
+|Lf delete course|&$Datapool_Course2.courseId|
+
+!4 LF Cleanup Course
+|script                                              |
+|Lf cleanup course;|&$Datapool_Course4.courseId|true |
+|Lf cleanup course;|&$Datapool_Course5.courseId|false|
+
+!4 Switch back to Local GUI Calling
+|Switch to Local|
+
+
