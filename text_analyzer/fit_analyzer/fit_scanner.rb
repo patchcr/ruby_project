@@ -13,7 +13,6 @@ def matching
 
 		match_text = text.scan(@string_regex)
 		puts match_text 
-		
 	end
 end
 
