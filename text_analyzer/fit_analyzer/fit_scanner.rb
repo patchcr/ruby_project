@@ -8,11 +8,8 @@ temp = FitScan::ComponentDef.new("//div")
 def matching
 
 	# First set the files to search/replace in
-<<<<<<< HEAD
 	files = Dir.glob("./*.txt")
-=======
-	files = Dir.glob("/Users/gsypolt/github/ruby_project/text_analyzer/fit_analyzer/*.txt*")
->>>>>>> 22b6c5f9cd67220f13042b6027d37af668945fd6
+
 
 	# Then set the variables for find/replace
 	@string_regex = /script/
