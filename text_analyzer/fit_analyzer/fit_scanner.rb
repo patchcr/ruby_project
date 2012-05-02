@@ -1,8 +1,14 @@
 # search file text for a pattern and replace it with a given value
 
+#This is just testing out how we should import modules and use the classes
+require_relative "FitScan"
+include FitScan
+temp = FitScan::ComponentDef.new("//div")
+
 def matching
+
 	# First set the files to search/replace in
-	files = Dir.glob("/Users/gsypolt/github/ruby_project/text_analyzer/*")
+	files = Dir.glob("./*.txt")
 
 	# Then set the variables for find/replace
 	@string_regex = /script/

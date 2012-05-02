@@ -7,9 +7,9 @@ end
 
 def wiki_parser
 	file_name = "content.txt"
-	
-	file_name.each do |space_striper|
-		text = File.read(file_name)
+
+	File.open(file_name).each do |space_striper|
+		text = space_striper
 		readable_file = text.gsub(/\s+/, ' ').strip.split 
 		puts readable_file
 	end
