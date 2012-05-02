@@ -1,0 +1,12 @@
+def summarize
+	text = %q{Ruby is a great programming language. It is object oriented and has many groovy features. Some people don't like it, but that not our problem! It's easy to learn. It's great. To learn more about Ruby, visit the official Ruby Web site today.}
+	
+	sentences = text.gsub(/\s+/, ' ').strip.split(/\.|\?|!/) # gsub gets ride large ares with white space \s+ meaning - one or more whitespace characters 
+	sentences_sorted = sentences.sort_by { |sentence| sentence.length }
+	one_third = sentences_sorted.length / 3
+	ideal_sentences = sentences_sorted.slice(one_third, one_third + 1)
+	ideal_sentences = ideal_sentences.select { |sentence| sentence =~ /is|are/ }
+	puts ideal_sentences.join(". ")
+end
+
+summarize
