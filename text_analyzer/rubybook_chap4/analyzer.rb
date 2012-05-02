@@ -19,7 +19,7 @@ def example2
 	file_name2 = "content.txt"
 	
 	
-	lines = File.readlines(file_name1)
+	lines = File.readlines(ARGV[0]) # line that reads the file pass through command-line
 	line_count = lines.size 
 	text = lines.join #Total Lines
 	total_characters = text.length # Total Characters
