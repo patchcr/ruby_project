@@ -66,10 +66,7 @@ def match file
 end
 
 
-fitNesseRoot = "c:/Users/pryan/Perforce/pryan_PRYANW7/BbAssist/FitNesseRoot"
-scan_directories_for_txtfiles(fitNesseRoot, "regression") {|f|
-	match File.open(f, "r")  rescue Errno::ENOENT # Open for Reading only
-	
-
-
-}
+# fitNesseRoot = "c:/Users/pryan/Perforce/pryan_PRYANW7/BbAssist/FitNesseRoot"
+# scan_directories_for_txtfiles(fitNesseRoot, "regression") {|f|
+#	match File.open(f, "r")  rescue Errno::ENOENT # Open for Reading only
+# }

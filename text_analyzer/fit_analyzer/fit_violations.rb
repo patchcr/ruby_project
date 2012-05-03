@@ -1,23 +1,32 @@
-# search file text for a pattern and replace it with a given value
+require "FitScan.rb"
 
-#This is just testing out how we should import modules and use the classes
+def code_violations 
 
-# require_relative "FitScan"
-# include FitScan
-# temp = FitScan::ComponentDef.new("//div")
-
-def code_violations
-
-	files = Dir.glob("./*.txt")
+	fitNesseRoot = "/Users/gsypolt/BbAssist/FitNesseRoot/"
 	
-	files.each do |file_name| 
-		text = File.readlines(file_name) 
-    wait_flag = text.select { |finder| finder =~ /wait/ }
-		  
-		puts "DIRECTORY - #{Dir.pwd}"		
-	  puts "WARNING - # of occurances found" 
-	  puts "#{wait_flag}" 
-	end
-end
+	scan_directories_for_txtfiles(fitNesseRoot, "regression") { |type_test| 
+	temp_file = File.open(type_test) 
+	
+	
+	# file_array = temp_file.each { |line| line.split }
+	
+  i = 0
+  k = ""
+  temp_file.each {|line| 
+    i += 1
+    temp = line.dup # For debugging 
+    j = line =~ /\|script/
+    
+    if j
+      # insert file_array
+      wait_flag = temp_file.select { |finder| finder =~ /wait/ }
+      puts "First script table found at line: " + i.to_s + " in: " + File.expand_path(type_test)
+      puts "WARNING - # of occurances found" 
+      puts "#{wait_flag}" 
+      return
+    end
+  }
+ }
+ end
 
 code_violations
