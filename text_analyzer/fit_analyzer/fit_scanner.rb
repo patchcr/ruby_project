@@ -12,7 +12,7 @@ def matching
 
 
 	# Then set the variables for find/replace
-	@string_regex = /script/
+	@string_regex = /wait/
 	@replacement_string = "STRING"
 	
 	files.each do |file_name|
@@ -20,7 +20,7 @@ def matching
 
 		# match_text = text.scan(@string_regex)
 		# puts match_text
-		scanner = text.select { |finder| finder =~ /script/ } 
+		scanner = text.select { |finder| finder =~ /wait/ } 
 		puts scanner 
 	end
 end
