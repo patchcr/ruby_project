@@ -28,6 +28,7 @@
 !4 Get Unique Parameter from Datapool
 !|script                                                             |
 |$dpCourse2Title=|get unique parameter|&$Datapool_Course2.courseTitle|
+|wait 				| 15 | seconds									 |
 
 !4 Switch to Remote API Calling
 |Switch to Remote|

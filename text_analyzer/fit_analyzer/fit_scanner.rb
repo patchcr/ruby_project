@@ -9,16 +9,14 @@
 def code_violations
 
 	files = Dir.glob("./*.txt")
-
-	@string_regex = /script/ # instance variables 
 	
 	files.each do |file_name| 
 		text = File.readlines(file_name) 
-
-		wait_error = text.select { |finder| finder =~ /wait/ } 
-		
-		puts Dir.pwd		
-		puts "#{wait_error}" 
+    wait_flag = text.select { |finder| finder =~ /wait/ }
+		  
+		puts "DIRECTORY - #{Dir.pwd}"		
+	  puts "WARNING - # of occurances found" 
+	  puts "#{wait_flag}" 
 	end
 end
 
