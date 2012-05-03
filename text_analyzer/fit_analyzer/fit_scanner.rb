@@ -6,7 +6,7 @@
 # include FitScan
 # temp = FitScan::ComponentDef.new("//div")
 
-def matching
+def code_violations
 
 	files = Dir.glob("./*.txt")
 
@@ -15,11 +15,11 @@ def matching
 	files.each do |file_name| 
 		text = File.readlines(file_name) 
 
-		scanner = text.select { |finder| finder =~ /script/ } 
+		wait_error = text.select { |finder| finder =~ /wait/ } 
 		
 		puts Dir.pwd		
-		puts "#{scanner}" 
+		puts "#{wait_error}" 
 	end
 end
 
-matching
+code_violations
