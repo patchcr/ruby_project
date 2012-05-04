@@ -27,7 +27,7 @@ def code_violations
          
           temp_file.each {|find| 
             temp_c = find.dup
-            c = find =~ /log message/
+            c = find =~ /wait/
             
             if c 
               count += 1
