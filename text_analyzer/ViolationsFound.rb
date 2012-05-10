@@ -10,7 +10,7 @@ def wait_violations
 
 	fitNesseRoot = "/Users/gsypolt/BbAssist/FitNesseRoot/"
 	
-	scan_directories_for_txtfiles(fitNesseRoot, "regression") { |type_test| 
+	scan_directories_for_txtfiles(fitNesseRoot, "scenario") { |type_test| 
 	vfile = File.open(type_test) 
 	
   i = 0
