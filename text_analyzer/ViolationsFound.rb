@@ -3,6 +3,7 @@ require "FitScan.rb"
 def initialize_scan
   @total_count = 0
   @total_files = 0
+  @time = Time.new
 end
 
 def wait_violations 
@@ -33,24 +34,21 @@ def wait_violations
       # type of search; all, regression, scenario, components
       # display the violation line number
       # total files found 1 more more violation
-      # total violations across directories   
-    end
-    
-    if count >= 1
-      count_file += 1
+      # total violations across scan directories   
     end
       
   end
   @total_count += count
-  @total_files += count_file
   vfile.close
  }
  end
 
 def violation_report
-  puts " ----- VIOLATIOIN REPORT ----- "
-  puts "TOTAL WAIT VIOLATION: " + "#{@total_count}"
-  puts "TOTAL FILES WITH VIOLATION: " + "#{@total_files}"
+  puts " ----- WAIT VIOLATIOIN REPORT ----- "
+  puts "Scan Time: " + @time.inspect
+  puts " "
+  puts "Total Violation: " + "#{@total_count}"
+  puts "Total Files With Violations: " + "#{@total_files}"
 end 
 
 # Execution
