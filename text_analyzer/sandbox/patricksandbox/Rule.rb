@@ -16,14 +16,14 @@ class RuleWait < Rule
     i = 0
     collection = Violation.new(:wait, @table.path)
     @table.table.each_with_index {|line, no|
-      if (line ~= /wait/)
+      if (line =~ /wait/)
         i += 1
         collection.add_v(@table.line_num + no)
       end
     }
     collection.count = i
     if collection.instance.empty?
-      return null
+      return nil
     else
       return collection
     end
@@ -37,7 +37,7 @@ class RuleNoComment < Rule
   def check
     collection = Violation.new(:nocomment, @table.path)
     @table.table.each_with_index {|line, no|
-      if (line ~= /log message/)
+      if (line =~ /log message/)
         collection.add_v(@table.line_num + no)
       end
     }
@@ -46,7 +46,7 @@ class RuleNoComment < Rule
       return collection
     else
       # This is a negative test so we we return a violation only if no log message was found
-      return null
+      return nil
     end
   end
 end

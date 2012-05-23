@@ -24,9 +24,10 @@ class Parser
           context = TableContext.new(scratch)
           context.line_num = file.lineno
           context.path = File.expand_path(file)
-          strategy = Strategy.new(context)
+          strategy = TableStrategy.new(context)
           violations = strategy.check
-          puts violations
+          puts "t?"
+          puts violations.to_s unless violations == nil
         end
       end
     }

@@ -1,7 +1,8 @@
 class Strategy
   require 'Rule.rb'
   require 'Violation.rb'
-  def initialize
+  def initialize 
+
     # do something
   end
 end
@@ -17,9 +18,9 @@ class TableStrategy < Strategy
     case @table.type
     when :SCRIPT_TABLE
       script = ScriptTableStrategy.new(@table)
-      return script.check
+      return script.check()
     else
-      null
+      nil
     end
   end
 end
@@ -29,8 +30,8 @@ class ScriptTableStrategy < TableStrategy
     @table = table_context
   end
   def check
-    wait_violation = RuleWait.new(@table).check
-    nocomment_violation = RuleNoComment.new(@table).check
+    wait_violation = RuleWait.new(@table).check()
+    nocomment_violation = RuleNoComment.new(@table).check()
     return wait_violation, nocomment_violation
   end
 end

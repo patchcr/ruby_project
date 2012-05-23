@@ -1,5 +1,6 @@
 module FitAnalyzer
-  require 'Parser.rb'
+  $LOAD_PATH.unshift File.dirname($PROGRAM_NAME)
+  require 'Parser'
   
   def command_line_interface
     # TODO: Read ARGV for options
@@ -39,5 +40,6 @@ module FitAnalyzer
   end
 end
 
+include FitAnalyzer
 # Execution for the entire program begins here:
 command_line_interface
