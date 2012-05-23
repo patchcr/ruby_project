@@ -1,0 +1,55 @@
+FitAnalyzer
+	module
+		method to read ARGV
+		method to search directory
+		pass file to parser
+
+class Parser/Interpreter
+	accepts file and looks for structures/contexts
+
+class Context
+	dictates how much information is necessary to represent the object
+	when a context (e.g. Table) is completed, the enclosing components
+	are packaged into a TableContext object and sent to the TableStrategy 
+	class for processing
+	< Table
+	< Includes
+	< HTML
+	< Variables
+	< Page
+	< Suite
+	< Component Def
+
+class Strategy
+	the Strategy class will accept a context object. The class methods will 
+	determine what type of strategy should be used and initialize a sub-
+	class for the specific algorithm necessary for that table type.
+	< Table
+		< Script
+		< Lf Script
+		< Datapool
+		< Scenario
+		< Component Def
+	< Component Def (context that holds current state for all comp defs so far)
+		< ID
+		< XPath
+	< Page
+		< TestPage
+		< SuiteSetUp
+		< Setup
+		< etc.
+
+class Rule
+	The Rule class will have numerous sub-classes. The basic idea is that
+	it will accept a certain type of Context object and return a violation
+	if one is found for that specific rule.
+	< Table
+		< Wait
+		< No Log message
+	< Component Def
+		< Duplicates (this would be able to accept a component def of any type
+					(ID, xpath, etc) and search for global duplicates)
+		< Look for malformed xpaths or hardcoded text
+	< etc.
+
+
