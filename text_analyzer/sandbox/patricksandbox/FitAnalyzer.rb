@@ -1,24 +1,41 @@
 module FitAnalyzer
-  require 'Parser'
+  require 'Parser.rb'
   
   def command_line_interface
-    # Read ARGV for options
-    fit_analyzer # with any valid arguments
+    # TODO: Read ARGV for options
+    default_root="c:/Users/pryan/Perforce/pryan_PRYANW7/BbAssist/FitNesseRoot"
+    search_type = "all"
+    fit_analyzer default_root, search_type 
   end
   
-  def fit_analyzer #accepts valid settings not yet implemented
+  def fit_analyzer root, search 
     parser = Parser.new
-    file_search { |file|
+    file_search(root,search) { |file|
       open_file = File.open file
       parser.parse open_file
       open_file.close
     }
   end
   
-  def file_search
-    # Code already written to find files
-    # From here we should be passing each file to the parser
-    
+  def file_search fitNesseRoot, type
+    folder = case type
+      when "regression"
+        "RegressionSuite"
+      when "scenario"
+        "ScenarioLib"
+      when "component"
+        "*Components"
+      when "all"
+        "**"
+      else
+        raise Exception, "Need regression, component, scenario, all, or none as second argument."
+      end
+    Dir.chdir(fitNesseRoot + "./LearnMainline/BbLearnTests/") {
+      Dir.glob("./**/" + folder + "/**/content.txt") { |f| 
+        #puts File.expand_path(f)
+        yield f
+      } 
+    }
   end
 end
 
