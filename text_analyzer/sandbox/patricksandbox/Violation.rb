@@ -10,6 +10,6 @@ class Violation
     @instance << line_num
   end
   def to_s
-    return @count + " number of " + @type + " violations in " + @path[-90..-12]
+    return @count.to_s + " number of " + @type.to_s + " violations in " + @path[-90..-12]
   end
 end

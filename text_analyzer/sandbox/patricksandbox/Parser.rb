@@ -13,11 +13,14 @@ class Parser
     in_table = false
     scratch = Array.new
     table_a = Array.new
-    
+    add_table_to_array = lambda {
+      
+    }
     file.lines { |line|
       if (line[0] == "|") or (line[0,2] == "!|")
         in_table = true
         scratch << line
+        
       else
         if in_table
           # Create Table Context object
@@ -26,9 +29,9 @@ class Parser
           context.path = File.expand_path(file)
           strategy = TableStrategy.new(context)
           violations = strategy.check
-          puts "t?"
-          puts violations.to_s unless violations == nil
+          puts violations.to_s unless violations == (nil or [nil,nil]) 
         end
+        in_table = false
       end
     }
   end
