@@ -20,7 +20,7 @@ class TableStrategy < Strategy
       script = ScriptTableStrategy.new(@table)
       return script.check()
     else
-      nil
+      return [Violation.new]
     end
   end
 end
@@ -32,6 +32,9 @@ class ScriptTableStrategy < TableStrategy
   def check
     wait_violation = RuleWait.new(@table).check()
     nocomment_violation = RuleNoComment.new(@table).check()
+    if wait_violation == nil and nocomment_violation == nil
+      return [Violation.new]
+    end
     return wait_violation, nocomment_violation
   end
 end

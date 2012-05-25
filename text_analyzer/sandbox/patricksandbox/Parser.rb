@@ -13,27 +13,25 @@ class Parser
     in_table = false
     scratch = Array.new
     table_a = Array.new
-    add_table_to_array = lambda {
-      
+    create_table = Proc.new {
+      context = TableContext.new(scratch)
+      context.line_num = file.lineno
+      context.path = File.expand_path(file)
+      strategy = TableStrategy.new(context)
+      return strategy.check
     }
     file.lines { |line|
       if (line[0] == "|") or (line[0,2] == "!|")
         in_table = true
         scratch << line
-        
+        create_table.call if file.eof?
       else
         if in_table
-          # Create Table Context object
-          context = TableContext.new(scratch)
-          context.line_num = file.lineno
-          context.path = File.expand_path(file)
-          strategy = TableStrategy.new(context)
-          violations = strategy.check
-          puts violations.to_s unless violations == (nil or [nil,nil]) 
+          create_table.call
         end
         in_table = false
       end
     }
+    return [Violation.new]
   end
- 
 end

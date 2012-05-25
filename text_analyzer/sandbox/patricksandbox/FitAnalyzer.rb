@@ -6,15 +6,26 @@ module FitAnalyzer
     # TODO: Read ARGV for options
     default_root="c:/Users/pryan/Perforce/pryan_PRYANW7/BbAssist/FitNesseRoot"
     search_type = "all"
-    fit_analyzer default_root, search_type 
+    log_file = "c:/Git/log.log"
+    fit_analyzer default_root, search_type, log_file
   end
   
-  def fit_analyzer root, search 
+  def fit_analyzer root, search, log
+    
     parser = Parser.new
     file_search(root,search) { |file|
-      open_file = File.open file
-      parser.parse open_file
-      open_file.close
+      begin
+        open_file = File.open file
+        violations = parser.parse open_file
+        # Perhaps we should raise an exception here instead of printing the stack. 
+        print "nil" + caller if violations.class == NilClass
+        print "file" + caller if violations.class == File
+        violations.each {|element|
+          add_to_log_file element, log
+        }
+        open_file.close
+      rescue Errno::ENOENT
+      end  
     }
   end
   
@@ -37,6 +48,17 @@ module FitAnalyzer
         yield f
       } 
     }
+  end
+  
+  def add_to_log_file violation, path
+    open_log = File.open(path, "a")
+    if violation.instance_of? NilClass
+      return
+    elsif violation.count == 0
+      return
+    end
+    open_log.printf violation.to_printf
+    open_log.close
   end
 end
 
