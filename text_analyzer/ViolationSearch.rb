@@ -75,7 +75,7 @@ class ViolationSearch
 		table_a
 	end
 
-	def scan_directories_for_txtfiles fitNesseRoot="c:/Users/pryan/Perforce/pryan_PRYANW7/BbAssist/FitNesseRoot", type="all"
+	def scan_directories_for_txtfiles fitNesseRoot="/Users/gsypolt/BbAssist/FitNesseRoot/", type="all"
 		# Accepts a directory and search type, yeilds a file	
 		folder = case type
 			when "regression"

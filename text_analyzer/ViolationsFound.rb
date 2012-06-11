@@ -6,7 +6,7 @@ def initialize_scan
   @time = Time.new
 end
 
-def wait_violations 
+def wait_rule
 
 	fitNesseRoot = "/Users/gsypolt/BbAssist/FitNesseRoot/"
 	
@@ -30,7 +30,7 @@ def wait_violations
       puts "#{count}" + " - of wait violations found on this file" 
       puts " "
       
-      # store this information inside text file
+      # store this information inside text file or hash
       # type of search; all, regression, scenario, components
       # display the violation line number
       # total files found 1 more more violation
@@ -42,6 +42,43 @@ def wait_violations
   vfile.close
  }
  end
+ 
+def xpath_datapool_rule
+
+  fitNesseRoot = "/Users/gsypolt/BbAssist/FitNesseRoot/"
+
+  scan_directories_for_txtfiles(fitNesseRoot, "regression") { |type_test| 
+  vfile = File.open(type_test) 
+
+  i = 0
+  count = 0
+  count_file = 0
+
+
+  vfile.each do |line| 
+    i += 1
+    check_violation = line =~ /\*\[contains/
+
+    if check_violation
+
+      count += 1
+
+      puts "LOCATION: "  + File.expand_path(type_test)
+      puts "#{count}" + " - of wait violations found on this file" 
+      puts " "
+
+      # store this information inside text file or hash
+      # type of search; all, regression, scenario, components
+      # display the violation line number
+      # total files found 1 more more violation
+      # total violations across scan directories   
+    end
+
+  end
+  @total_count += count
+  vfile.close
+ }
+end
 
 def violation_report
   puts " ----- WAIT VIOLATIOIN REPORT ----- "
@@ -53,5 +90,5 @@ end
 
 # Execution
 initialize_scan
-wait_violations
+xpath_datapool_rule
 violation_report
