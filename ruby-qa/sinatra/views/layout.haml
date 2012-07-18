@@ -2,25 +2,28 @@
 %html
   %head
     %title QA Ruby Tools
-    %link(rel="stylesheet" href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css")
     %link(rel="stylesheet" href="css/styles.css")
   %body
-    #wrapper
-      #header
+    
+    %div.banner
+      %header
         %h1 QA Ruby Tools
-        %h2 A Simple Site made with Sinatra and HAML!
-      #nav
-        %ol  
-          %a(href="/")  
-            %li Home  
-          %a(href="reports")  
-            %li Axman Reports
-          %a(href="analysis")  
-            %li Fitnesse Static Code Analysis
+    
+    %div.menu
+      -# :javascript
+      %ul.buttons
+        %li
+          %a(href="/")Home
+        %li
+          %a(href="reports")AxMan Reports
+        %li
+          %a(href="analyzer")FIT Analyzer
+        %li 
+          %a(href="environment")Environment
+    
+    %div.content_wrapper
+      =yield
 
-      #content
-        =yield
-
-      #footer
-        %p
-          Blackboard QA 2012
+    %div.footer
+      %p
+        Blackboard QA 2012

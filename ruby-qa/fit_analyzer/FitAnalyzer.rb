@@ -4,9 +4,9 @@ module FitAnalyzer
   
   def command_line_interface
     # TODO: Read ARGV for options
-    default_root="/usr/local/p4/FitNesseRoot"
+    default_root="/Users/gsypolt/BbAssist/FitNesseRoot"
     search_type = "all"
-    log_file = "/usr/local/sinatrafiles/fit_analyzer/logs/fitanalyser.log"
+    log_file = "/Users/gsypolt/github/ruby_project/ruby-qa/fit_analyzer/logs/fitanalyser.log"
     fit_analyzer default_root, search_type, log_file
   end
   

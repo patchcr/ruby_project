@@ -10,8 +10,12 @@ get '/reports' do
     haml :reports
 end
 
-get '/analysis' do
-    haml :analysis
+get '/analyzer' do
+    haml :analyzer
+end
+
+get '/environment' do
+    haml :environment
 end
 
 
